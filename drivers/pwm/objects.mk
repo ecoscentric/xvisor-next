@@ -24,3 +24,4 @@
 
 drivers-objs-$(CONFIG_PWM)		+= pwm/core.o
 drivers-objs-$(CONFIG_PWM_IMX)		+= pwm/pwm-imx.o
+drivers-objs-$(CONFIG_PWM_ROCKCHIP)	+= pwm/pwm-rockchip.o
