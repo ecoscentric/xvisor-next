@@ -111,6 +111,23 @@ struct notifier_block;
 #define REGULATOR_EVENT_FORCE_DISABLE		0x20
 #define REGULATOR_EVENT_VOLTAGE_CHANGE		0x40
 #define REGULATOR_EVENT_DISABLE 		0x80
+#define REGULATOR_EVENT_PRE_VOLTAGE_CHANGE	0x100
+#define REGULATOR_EVENT_ABORT_VOLTAGE_CHANGE	0x200
+#define REGULATOR_EVENT_PRE_DISABLE		0x400
+#define REGULATOR_EVENT_ABORT_DISABLE		0x800
+
+/**
+ * struct pre_voltage_change_data - Data sent with PRE_VOLTAGE_CHANGE event
+ *
+ * @old_uV: Current voltage before change.
+ * @min_uV: Min voltage we'll change to.
+ * @max_uV: Max voltage we'll change to.
+ */
+struct pre_voltage_change_data {
+	unsigned long old_uV;
+	unsigned long min_uV;
+	unsigned long max_uV;
+};
 
 struct regulator;
 
