@@ -489,12 +489,17 @@ int vmm_devtree_read_u8_array(const struct vmm_devtree_node *node,
 {
 	u32 i, asz;
 	const u8 *aval;
+	struct vmm_devtree_attr *attr;
 
 	if (!node || !attrib || !out || !sz) {
 		return VMM_EINVALID;
 	}
 
-	aval = vmm_devtree_attrval(node, attrib);
+	attr = vmm_devtree_getattr(node, attrib);
+	if (!attr) {
+		return VMM_EINVALID;
+	}
+	aval = attr->value;
 	if (!aval) {
 		return VMM_ENOTAVAIL;
 	}
@@ -565,12 +570,17 @@ int vmm_devtree_read_u16_array(const struct vmm_devtree_node *node,
 {
 	u32 i, s, asz;
 	const void *aval;
+	struct vmm_devtree_attr *attr;
 
 	if (!node || !attrib || !out || (sz<=0)) {
 		return VMM_EINVALID;
 	}
 
-	aval = vmm_devtree_attrval(node, attrib);
+	attr = vmm_devtree_getattr(node, attrib);
+	if (!attr) {
+		return VMM_EINVALID;
+	}
+	aval = attr->value;
 	if (!aval) {
 		return VMM_ENOTAVAIL;
 	}
@@ -660,12 +670,17 @@ int vmm_devtree_read_u32_array(const struct vmm_devtree_node *node,
 {
 	u32 i, s, asz;
 	const void *aval;
+	struct vmm_devtree_attr *attr;
 
 	if (!node || !attrib || !out || (sz<=0)) {
 		return VMM_EINVALID;
 	}
 
-	aval = vmm_devtree_attrval(node, attrib);
+	attr = vmm_devtree_getattr(node, attrib);
+	if (!attr) {
+		return VMM_EINVALID;
+	}
+	aval = attr->value;
 	if (!aval) {
 		return VMM_ENOTAVAIL;
 	}
