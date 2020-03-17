@@ -41,6 +41,7 @@
 struct vmm_device;
 struct vmm_devtree_node;
 struct regmap;
+struct i2c_client;
 
 #define	regmap_update_bits(map, reg, mask, val) \
 	regmap_update_bits_base(map, reg, mask, val, NULL, false, false)
@@ -246,6 +247,8 @@ struct regmap *__devm_regmap_init(struct vmm_device *dev,
 				  const struct regmap_bus *bus,
 				  void *bus_context,
 				  const struct regmap_config *config);
+struct regmap *__devm_regmap_init_i2c(struct i2c_client *i2c,
+				  const struct regmap_config *config);
 struct regmap *__devm_regmap_init_mmio_clk(struct vmm_device *dev,
 					   const char *clk_id,
 					   void *regs,
@@ -310,6 +313,19 @@ int regmap_attach_dev(struct vmm_device *dev, struct regmap *map,
  */
 #define devm_regmap_init(dev, bus, bus_context, config)			\
 	__devm_regmap_init(dev, bus, bus_context, config)
+
+/**
+ * devm_regmap_init_i2c(): Initialise managed register map
+ *
+ * @i2c: Device that will be interacted with
+ * @config: Configuration for register map
+ *
+ * The return value will be an ERR_PTR() on error or a valid pointer
+ * to a struct regmap.  The regmap will be automatically freed by the
+ * device management code.
+ */
+#define devm_regmap_init_i2c(i2c, config)				\
+	__devm_regmap_init_i2c(i2c, config)
 
 /**
  * devm_regmap_init_mmio_clk() - Initialise managed register map with clock
