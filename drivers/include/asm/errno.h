@@ -38,4 +38,5 @@
 #define EAGAIN			-(VMM_EAGAIN)
 #define EPROTO			-(VMM_EPROTO)
 #define EACCES			-(VMM_EACCESS)
+#define EPERM			-(VMM_EFAIL)
 #endif /* defined(_ASM_ERRNO_H) */
